@@ -27,9 +27,19 @@ export const openRecipe = id => ({
     id,
 });
 
+export const openRecipeEdit = id => ({
+    type: actionTypes.OPEN_RECIPE_EDIT,
+    id,
+});
+
 export const getRecipe = id => ({
     type: actionTypes.GET_RECIPE,
     id,
+});
+
+export const editRecipe = recipe => ({
+    type: actionTypes.EDIT_RECIPE,
+    recipe,
 });
 
 export const setRecipe = recipe => ({

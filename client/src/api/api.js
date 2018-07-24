@@ -6,11 +6,11 @@ const createRecipe = (data) => {
     return request({
         method: 'POST',
         uri: `${DOMAIN}`,
+        json: true,
         body: {
             title: data.title,
             description: data.description,
         },
-        json: true,
     });
 };
 
@@ -18,6 +18,18 @@ const getRecipe = (id) => {
     return request({
         uri: `${DOMAIN}/${id}`,
         json: true,
+    });
+}
+
+const editRecipe = (recipe) => {
+    return request({
+        method: 'PATCH',
+        uri: `${DOMAIN}/${recipe._id}`,
+        json: true,
+        body: {
+            title: recipe.title,
+            description: recipe.description,
+        },
     });
 }
 
@@ -38,6 +50,7 @@ const getRecipes = () => {
 export default {
     createRecipe,
     getRecipe,
+    editRecipe,
     deleteRecipe,
     getRecipes,
 }

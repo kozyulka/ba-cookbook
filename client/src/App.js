@@ -9,7 +9,7 @@ import createSagaMiddleware from "redux-saga";
 import Recipes from './containers/Recipes';
 import RecipeCreation from './containers/RecipeCreation';
 import RecipeView from './containers/RecipeView';
-// import RecipeEditing from './containers/RecipeEditing';
+import RecipeEditing from './containers/RecipeEditing';
 import { reducer, initialState } from './store/reducer';
 import { watcherSaga } from './store/sagas';
 import Main from './containers/Main';
@@ -38,6 +38,7 @@ class App extends Component {
             <Switch>
               <Route path='/' render={() => <Redirect to='recipes' />} exact />
               <Route path='/recipes/create' component={RecipeCreation} exact />
+              <Route path='/recipes/edit/:id' component={RecipeEditing} />
               <Route path='/recipes/:id' component={RecipeView} />
               <Route path='/recipes' component={Recipes} exact />
             </Switch>

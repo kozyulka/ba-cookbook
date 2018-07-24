@@ -9,14 +9,14 @@ import AddRecipeButton from '../components/AddRecipeButton';
 import RecipeItem from '../components/RecipeItem';
 import EmptyRecipes from '../components/EmptyRecipes';
 
-import { openRecipeCreate, openRecipe, deleteRecipe } from '../store/actions'
+import { openRecipeCreate, openRecipe, deleteRecipe, openRecipeEdit } from '../store/actions'
 
 const mapStateToProps = state => ({
     recipes: state.recipes,
 });
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ openRecipeCreate, openRecipe, deleteRecipe }, dispatch)
+    return bindActionCreators({ openRecipeCreate, openRecipe, deleteRecipe, openRecipeEdit }, dispatch)
 };
 
 class Recipes extends React.Component {
@@ -27,6 +27,7 @@ class Recipes extends React.Component {
         })).isRequired,
         openRecipeCreate: PropTypes.func.isRequired,
         openRecipe: PropTypes.func.isRequired,
+        openRecipeEdit: PropTypes.func.isRequired,
         deleteRecipe: PropTypes.func.isRequired,
     }
 
@@ -53,6 +54,7 @@ class Recipes extends React.Component {
                                     <RecipeItem
                                         onClick={() => this.props.openRecipe(recipe._id)}
                                         delete={() => this.props.deleteRecipe(recipe._id)}
+                                        edit={() => this.props.openRecipeEdit(recipe._id)}
                                         title={recipe.title}
                                         description={recipe.description}
                                         key={recipe._id}

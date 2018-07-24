@@ -4,14 +4,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Header, Button, Segment, Grid, Icon, Rating } from 'semantic-ui-react';
 
-import { deleteRecipe, openRecipes, getRecipe } from '../store/actions'
+import { deleteRecipe, openRecipes, getRecipe, openRecipeEdit } from '../store/actions';
 
 const mapStateToProps = state => ({
     selectedRecipe: state.selectedRecipe,
 });
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ deleteRecipe, openRecipes, getRecipe }, dispatch);
+    return bindActionCreators({ deleteRecipe, openRecipes, getRecipe, openRecipeEdit }, dispatch);
 };
 
 class RecipeView extends React.Component {
@@ -19,7 +19,9 @@ class RecipeView extends React.Component {
         deleteRecipe: PropTypes.func.isRequired,
         openRecipes: PropTypes.func.isRequired,
         getRecipe: PropTypes.func.isRequired,
+        openRecipeEdit: PropTypes.func.isRequired,
         selectedRecipe: PropTypes.shape({
+            _id: PropTypes.string,
             title: PropTypes.string,
             description: PropTypes.string,
         }),
@@ -27,6 +29,7 @@ class RecipeView extends React.Component {
 
     static defaultProps = {
         selectedRecipe: {
+            _id: '',
             title: '',
             description: '',
         },
@@ -57,7 +60,7 @@ class RecipeView extends React.Component {
                                 <Icon name='long arrow alternate left' />
                                 <span>Back to recipes</span>
                             </Button>
-                            <Button icon>
+                            <Button icon onClick={() => this.props.openRecipeEdit(this.props.selectedRecipe._id)}>
                                 <Icon name='edit outline' />
                                 <span> Edit </span>
                             </Button>
