@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, Form, Button, Segment, Grid } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { Form, Button, Segment, Grid } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -10,6 +11,11 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class RecipeCreation extends React.Component {
+    static propTypes = {
+        openRecipes: PropTypes.func.isRequired,
+        saveRecipe: PropTypes.func.isRequired,
+    }
+
     constructor() {
         super();
 
@@ -52,31 +58,31 @@ class RecipeCreation extends React.Component {
 
     render() {
         return (
-            <Grid columns={2}  centered padded>
-                    <Grid.Column textAlign='center'>
-                        <Form>
-                            <Segment>
-                                <Form.Input
-                                    fluid
-                                    label='Recipe name'
-                                    placeholder='Enter recipe title'
-                                    value={this.state.title}
-                                    onChange={this.setTitle}
-                                />
-                                <Form.TextArea
-                                    label='Recipe description'
-                                    placeholder='Enter recipe details'
-                                    value={this.state.description}
-                                    onChange={this.setDescription}
-                                />
-                            </Segment>
+            <Grid columns={2} centered padded>
+                <Grid.Column textAlign='center'>
+                    <Form>
+                        <Segment>
+                            <Form.Input
+                                fluid
+                                label='Recipe name'
+                                placeholder='Enter recipe title'
+                                value={this.state.title}
+                                onChange={this.setTitle}
+                            />
+                            <Form.TextArea
+                                label='Recipe description'
+                                placeholder='Enter recipe details'
+                                value={this.state.description}
+                                onChange={this.setDescription}
+                            />
+                        </Segment>
 
-                            <Segment>
-                                <Button color='red' onClick={this.props.openRecipes}>Cancel</Button>
-                                <Button color='yellow' onClick={this.saveRecipe}>Save Recipe</Button>
-                            </Segment>
-                        </Form>
-                    </Grid.Column>
+                        <Segment>
+                            <Button color='red' onClick={this.props.openRecipes}>Cancel</Button>
+                            <Button color='yellow' onClick={this.saveRecipe}>Save Recipe</Button>
+                        </Segment>
+                    </Form>
+                </Grid.Column>
             </Grid>
         );
     }

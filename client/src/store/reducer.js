@@ -1,19 +1,9 @@
 import actionTypes from './actionTypes';
 
-const { SET_RECIPES } = actionTypes;
+const { SET_RECIPES, SELECT_RECIPE } = actionTypes;
 const initialState = {
-    recipes: [
-        {
-            title: 'potato',
-            description: 'nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede link mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.',
-
-        },
-        {
-            title: 'pasta',
-            description: 'carbonara',
-        }
-
-    ]
+    recipes: [],
+    selectedRecipe: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +13,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 recipes: action.recipes,
             };
+        case SELECT_RECIPE: {
+            return {
+                ...state,
+                selectedRecipe: action.recipe,
+            }
+        }
 
         default: return state;
     }
