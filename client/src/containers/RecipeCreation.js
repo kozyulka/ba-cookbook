@@ -58,10 +58,10 @@ class RecipeCreation extends React.Component {
 
     render() {
         return (
-            <Grid columns={2} centered padded>
-                <Grid.Column textAlign='center'>
+            <Grid centered padded>
+                <Grid.Column textAlign='center' width="9">
                     <Form>
-                        <Segment>
+                        <Segment padded>
                             <Form.Input
                                 fluid
                                 label='Recipe name'
@@ -78,8 +78,8 @@ class RecipeCreation extends React.Component {
                         </Segment>
 
                         <Segment>
-                            <Button color='red' onClick={this.props.openRecipes}>Cancel</Button>
-                            <Button color='yellow' onClick={this.saveRecipe}>Save Recipe</Button>
+                            <Button color='red' onClick={this.props.openRecipes} >Cancel</Button>
+                            <Button color='olive' onClick={this.saveRecipe} floated='right'>Save Recipe</Button>
                         </Segment>
                     </Form>
                 </Grid.Column>

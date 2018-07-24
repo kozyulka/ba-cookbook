@@ -1,9 +1,9 @@
 import actionTypes from './actionTypes';
 
-const { SET_RECIPES, SELECT_RECIPE } = actionTypes;
+const { SET_RECIPES, SET_RECIPE } = actionTypes;
 const initialState = {
     recipes: [],
-    selectedRecipe: null,
+    selectedRecipe: undefined,
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,12 +13,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 recipes: action.recipes,
             };
-        case SELECT_RECIPE: {
+
+        case SET_RECIPE:
             return {
                 ...state,
                 selectedRecipe: action.recipe,
-            }
-        }
+            };
 
         default: return state;
     }

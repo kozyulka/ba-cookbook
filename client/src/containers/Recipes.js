@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Item, Container, Segment } from 'semantic-ui-react';
+import { Item, Grid, Segment } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -9,14 +9,14 @@ import AddRecipeButton from '../components/AddRecipeButton';
 import RecipeItem from '../components/RecipeItem';
 import EmptyRecipes from '../components/EmptyRecipes';
 
-import { openRecipeCreate, selectRecipe, deleteRecipe } from '../store/actions'
+import { openRecipeCreate, openRecipe, deleteRecipe } from '../store/actions'
 
 const mapStateToProps = state => ({
     recipes: state.recipes,
 });
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ openRecipeCreate, selectRecipe, deleteRecipe }, dispatch)
+    return bindActionCreators({ openRecipeCreate, openRecipe, deleteRecipe }, dispatch)
 };
 
 class Recipes extends React.Component {
@@ -26,7 +26,7 @@ class Recipes extends React.Component {
             description: PropTypes.string.isRequired,
         })).isRequired,
         openRecipeCreate: PropTypes.func.isRequired,
-        selectRecipe: PropTypes.func.isRequired,
+        openRecipe: PropTypes.func.isRequired,
         deleteRecipe: PropTypes.func.isRequired,
     }
 
@@ -36,29 +36,33 @@ class Recipes extends React.Component {
         }
 
         return (
-            <Container>
-                <Segment.Group horizontal>
-                    <Segment>
-                        <AddRecipeButton onClick={this.props.openRecipeCreate} />
-                    </Segment>
-                    <Segment textAlign="right">
-                        <Search />
-                    </Segment>
-                </Segment.Group>
-                <Segment>
-                    <Item.Group>
-                        {this.props.recipes.map(recipe => (
-                            <RecipeItem
-                                onClick={() => this.props.selectRecipe(recipe)}
-                                delete={() => this.props.deleteRecipe(recipe._id)}
-                                title={recipe.title}
-                                description={recipe.description}
-                                key={recipe._id}
-                            />
-                        ))}
-                    </Item.Group>
-                </Segment>
-            </Container>
+            <div className="cookbook">
+                <Grid centered padded>
+                    <Grid.Column width="9">
+                        <Segment.Group horizontal>
+                            <Segment>
+                                <AddRecipeButton onClick={this.props.openRecipeCreate} />
+                            </Segment>
+                            <Segment textAlign="right">
+                                <Search />
+                            </Segment>
+                        </Segment.Group>
+                        <Segment>
+                            <Item.Group>
+                                {this.props.recipes.map(recipe => (
+                                    <RecipeItem
+                                        onClick={() => this.props.openRecipe(recipe._id)}
+                                        delete={() => this.props.deleteRecipe(recipe._id)}
+                                        title={recipe.title}
+                                        description={recipe.description}
+                                        key={recipe._id}
+                                    />
+                                ))}
+                            </Item.Group>
+                        </Segment>
+                    </Grid.Column>
+                </Grid>
+            </div>
         );
     }
 }

@@ -14,6 +14,13 @@ const createRecipe = (data) => {
     });
 };
 
+const getRecipe = (id) => {
+    return request({
+        uri: `${DOMAIN}/${id}`,
+        json: true,
+    });
+}
+
 const deleteRecipe = (id) => {
     return request({
         method: 'DELETE',
@@ -30,6 +37,7 @@ const getRecipes = () => {
 
 export default {
     createRecipe,
+    getRecipe,
     deleteRecipe,
     getRecipes,
 }

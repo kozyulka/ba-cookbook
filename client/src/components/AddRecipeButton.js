@@ -4,7 +4,7 @@ import { Button, Icon } from 'semantic-ui-react'
 
 const AddRecipeButton = ({ onClick }) => (
     <div>
-        <Button icon labelPosition='left' color='olive' onClick={onClick} size='big'>
+        <Button icon labelPosition='left' color='olive' onClick={onClick} >
             <Icon name='add' />
             Add recipe
         </Button>

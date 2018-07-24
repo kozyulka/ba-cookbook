@@ -11,7 +11,7 @@ const EmptyRecipes = (props) => {
             <Grid.Column width="6" textAlign='center'>
                 <Grid.Row>
                     <div className="text-welcome">
-                        Welcome! You don't have any recipes yet. Let's change that! <br/> Oink Oink :)
+                        Welcome! <br/> You don't have any recipes yet. Let's change that! <br/> Oink Oink :)
                     </div>
                 </Grid.Row>
                 <Grid.Row>
