@@ -77,8 +77,9 @@ class Recipes extends React.Component {
             return;
         }
 
+        const lowerCaseSearch = searchString.toLowerCase();
         const filteredRecipes = recipes.filter((recipe) => {
-            if (recipe.title.includes(searchString) || recipe.description.includes(searchString)) {
+            if (recipe.title.toLowerCase().includes(lowerCaseSearch)) {
                 return true;
             }
 

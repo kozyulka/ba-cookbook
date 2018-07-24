@@ -20,7 +20,7 @@ class RecipeView extends React.Component {
         openRecipes: PropTypes.func.isRequired,
         getRecipe: PropTypes.func.isRequired,
         openRecipeEdit: PropTypes.func.isRequired,
-        editRecipe: PropTypes.func.isRequired,
+        editRecipeRating: PropTypes.func.isRequired,
         selectedRecipe: PropTypes.shape({
             _id: PropTypes.string,
             title: PropTypes.string,
