@@ -41,6 +41,7 @@ class RecipeCreation extends React.Component {
         this.props.saveRecipe({
             title: this.state.title,
             description: this.state.description,
+            rating: 3,
         });
     }
 

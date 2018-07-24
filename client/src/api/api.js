@@ -10,6 +10,7 @@ const createRecipe = (data) => {
         body: {
             title: data.title,
             description: data.description,
+            rating: data.rating,
         },
     });
 };
@@ -29,6 +30,7 @@ const editRecipe = (recipe) => {
         body: {
             title: recipe.title,
             description: recipe.description,
+            rating: recipe.rating,
         },
     });
 }

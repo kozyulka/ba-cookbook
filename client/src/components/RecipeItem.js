@@ -6,9 +6,14 @@ const RecipeItem = (props) => {
     return (
         <Item>
             <Item.Content onClick={props.onClick}>
-                <Rating icon='star' defaultRating={3} maxRating={5} />
-                <Item.Header>{props.title}</Item.Header>
-                <Item.Description>{props.description}</Item.Description>
+                <Rating
+                    icon='star'
+                    rating={props.recipe.rating}
+                    maxRating={5}
+                    onRate={props.rate}
+                />
+                <Item.Header>{props.recipe.title}</Item.Header>
+                <Item.Description>{props.recipe.description}</Item.Description>
             </Item.Content>
             <Button.Group size="massive">
                 <Button icon onClick={props.edit}>
@@ -23,9 +28,14 @@ const RecipeItem = (props) => {
 };
 
 RecipeItem.propTypes = {
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    recipe: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+    }).isRequired,
     onClick: PropTypes.func.isRequired,
+    rate: PropTypes.func.isRequired,
     delete: PropTypes.func.isRequired,
     edit: PropTypes.func.isRequired,
 };

@@ -4,14 +4,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Header, Button, Segment, Grid, Icon, Rating } from 'semantic-ui-react';
 
-import { deleteRecipe, openRecipes, getRecipe, openRecipeEdit } from '../store/actions';
+import { deleteRecipe, openRecipes, getRecipe, openRecipeEdit, editRecipeRating } from '../store/actions';
 
 const mapStateToProps = state => ({
     selectedRecipe: state.selectedRecipe,
 });
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ deleteRecipe, openRecipes, getRecipe, openRecipeEdit }, dispatch);
+    return bindActionCreators({ deleteRecipe, openRecipes, getRecipe, openRecipeEdit, editRecipeRating }, dispatch);
 };
 
 class RecipeView extends React.Component {
@@ -20,10 +20,12 @@ class RecipeView extends React.Component {
         openRecipes: PropTypes.func.isRequired,
         getRecipe: PropTypes.func.isRequired,
         openRecipeEdit: PropTypes.func.isRequired,
+        editRecipe: PropTypes.func.isRequired,
         selectedRecipe: PropTypes.shape({
             _id: PropTypes.string,
             title: PropTypes.string,
             description: PropTypes.string,
+            rating: PropTypes.number,
         }),
     }
 
@@ -32,6 +34,7 @@ class RecipeView extends React.Component {
             _id: '',
             title: '',
             description: '',
+            rating: 0,
         },
     }
 
@@ -48,6 +51,15 @@ class RecipeView extends React.Component {
     delete() {
         this.props.deleteRecipe(this.props.selectedRecipe._id);
         this.props.openRecipes();
+    }
+
+    changeRating(event, rating, recipe) {
+        event.stopPropagation();
+
+        this.props.editRecipeRating({
+            ...recipe,
+            rating,
+        });
     }
 
     render() {
@@ -70,7 +82,12 @@ class RecipeView extends React.Component {
                             </Button>
                         </Segment>
                         <Segment>
-                            <Rating icon='star' defaultRating={3} maxRating={5} />
+                            <Rating
+                                icon='star'
+                                rating={this.props.selectedRecipe.rating}
+                                maxRating={5}
+                                onRate={(event, props) => this.changeRating(event, props.rating, this.props.selectedRecipe)}
+                            />
                             <Header as='h1' color='olive'>{this.props.selectedRecipe.title}</Header>
                         </Segment>
                         <Segment>{this.props.selectedRecipe.description}</Segment>

@@ -42,6 +42,11 @@ export const editRecipe = recipe => ({
     recipe,
 });
 
+export const editRecipeRating = recipe => ({
+    type: actionTypes.EDIT_RECIPE_RATING,
+    recipe,
+});
+
 export const setRecipe = recipe => ({
     type: actionTypes.SET_RECIPE,
     recipe,

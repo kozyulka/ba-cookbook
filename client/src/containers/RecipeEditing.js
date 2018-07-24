@@ -23,6 +23,7 @@ class RecipeEditing extends React.Component {
             _id: PropTypes.string,
             title: PropTypes.string,
             description: PropTypes.string,
+            rating: PropTypes.number,
         }),
     }
 
@@ -31,6 +32,7 @@ class RecipeEditing extends React.Component {
             _id: '',
             title: '',
             description: '',
+            rating: 0,
         },
     }
 
@@ -76,6 +78,7 @@ class RecipeEditing extends React.Component {
             _id: this.state.recipe._id,
             title: this.state.recipe.title,
             description: this.state.recipe.description,
+            rating: this.state.recipe.rating,
         });
     }
 

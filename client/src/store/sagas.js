@@ -13,6 +13,7 @@ function* watcherSaga() {
   yield takeLatest(actionTypes.OPEN_RECIPE_EDIT, openRecipeEdit);
   yield takeLatest(actionTypes.GET_RECIPE, getRecipe);
   yield takeLatest(actionTypes.EDIT_RECIPE, editRecipe);
+  yield takeLatest(actionTypes.EDIT_RECIPE_RATING, editRecipeRating);
 
   yield takeLatest(actionTypes.OPEN_RECIPES, openRecipes);
   yield takeLatest(actionTypes.GET_RECIPES, getRecipes);
@@ -39,6 +40,12 @@ function* getRecipe(action) {
 function* editRecipe(action) {
   yield call(api.editRecipe, action.recipe);
   yield openRecipes();
+  yield getRecipes();
+}
+
+function* editRecipeRating(action) {
+  yield call(api.editRecipe, action.recipe);
+  yield getRecipe({ id: action.recipe._id });
   yield getRecipes();
 }
 

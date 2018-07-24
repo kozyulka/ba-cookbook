@@ -8,21 +8,23 @@ import AddRecipeButton from '../components/AddRecipeButton';
 import RecipeItem from '../components/RecipeItem';
 import EmptyRecipes from '../components/EmptyRecipes';
 
-import { openRecipeCreate, openRecipe, deleteRecipe, openRecipeEdit } from '../store/actions'
+import { openRecipeCreate, openRecipe, deleteRecipe, openRecipeEdit, editRecipe } from '../store/actions'
 
 const mapStateToProps = state => ({
     recipes: state.recipes,
 });
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ openRecipeCreate, openRecipe, deleteRecipe, openRecipeEdit }, dispatch)
+    return bindActionCreators({ openRecipeCreate, openRecipe, deleteRecipe, openRecipeEdit, editRecipe }, dispatch)
 };
 
 class Recipes extends React.Component {
     static propTypes = {
         recipes: PropTypes.arrayOf(PropTypes.shape({
+            _id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             description: PropTypes.string.isRequired,
+            rating: PropTypes.number.isRequired,
         })).isRequired,
         openRecipeCreate: PropTypes.func.isRequired,
         openRecipe: PropTypes.func.isRequired,
@@ -39,11 +41,12 @@ class Recipes extends React.Component {
         };
 
         this.search = this.search.bind(this);
+        this.changeRating = this.changeRating.bind(this);
     }
 
     componentDidMount() {
         this.setState({
-            search: this.props.recipes,
+            recipes: this.props.recipes,
         });
     }
 
@@ -87,6 +90,15 @@ class Recipes extends React.Component {
         });
     }
 
+    changeRating(event, rating, recipe) {
+        event.stopPropagation();
+
+        this.props.editRecipe({
+            ...recipe,
+            rating,
+        });
+    }
+
     render() {
         if (this.props.recipes.length === 0) {
             return <EmptyRecipes openRecipeCreate={this.props.openRecipeCreate} />;
@@ -116,8 +128,8 @@ class Recipes extends React.Component {
                                         onClick={() => this.props.openRecipe(recipe._id)}
                                         delete={() => this.props.deleteRecipe(recipe._id)}
                                         edit={() => this.props.openRecipeEdit(recipe._id)}
-                                        title={recipe.title}
-                                        description={recipe.description}
+                                        rate={(event, props) => this.changeRating(event, props.rating, recipe)}
+                                        recipe={recipe}
                                         key={recipe._id}
                                     />
                                 ))}
